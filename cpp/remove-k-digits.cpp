@@ -1,10 +1,6 @@
 #include <stack>
 #include <string>
 
-#include "iostream"
-#include "map"
-#include "math.h"
-#include "vector"
 
 using namespace std;
 
