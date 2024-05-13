@@ -5,15 +5,15 @@ using namespace std;
 
 // class Solution {
 // public:
-//     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+//     bool canFinish(int nums, vector<vector<int>>& prerequisites) {
 //         map<int, vector<int>> graph;
-//         vector<int> indegree(numCourses, 0);
+//         vector<int> indegree(nums, 0);
 //         for (auto p : prerequisites) {
 //             graph[p[1]].push_back(p[0]);
 //             indegree[p[0]]++;
 //         }
 //         vector<int> q;
-//         for (int i = 0; i < numCourses; i++) {
+//         for (int i = 0; i < nums; i++) {
 //             if (indegree[i] == 0) {
 //                 q.push_back(i);
 //             }
@@ -30,7 +30,7 @@ using namespace std;
 //                 }
 //             }
 //         }
-//         return count == numCourses;
+//         return count == nums;
 //     }
 // };
 
@@ -53,13 +53,13 @@ public:
     visited[node] = 2;
     return true;
   }
-  bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-    vector<vector<int>> graph(numCourses);
+  bool canFinish(int nums, vector<vector<int>>& prerequisites) {
+    vector<vector<int>> graph(nums);
     for (auto p : prerequisites) {
       graph[p[1]].push_back(p[0]);
     }
-    vector<int> visited(numCourses, 0);
-    for (int i = 0; i < numCourses; i++) {
+    vector<int> visited(nums, 0);
+    for (int i = 0; i < nums; i++) {
       if (!dfs(i, graph, visited)) {
         return false;
       }
