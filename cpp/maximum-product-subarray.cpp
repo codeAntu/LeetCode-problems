@@ -1,27 +1,54 @@
-#include "iostream"
-#include "map"
 #include "math.h"
 #include "vector"
 
 using namespace std;
 
+// class Solution {
+// public:
+//   int maxProduct(vector<int>& nums) {
+//     int n = nums.size();
+//     double maxProd = INT_MIN;
+//     double prod = 1;
+
+//     for (int i = 0; i < n; i++) {
+//       prod *= nums[i];
+//       maxProd = max(maxProd, prod);
+//       if (prod == 0) {
+//         prod = 1;
+//       }
+//     }
+//     prod = 1;
+//     for (int i = n - 1; i >= 0; i--) {
+//       prod *= nums[i];
+//       maxProd = max(maxProd, prod);
+//       if (prod == 0) {
+//         prod = 1;
+//       }
+//     }
+//     return maxProd;
+//   }
+// };
+
 class Solution {
 public:
   int maxProduct(vector<int>& nums) {
     int n = nums.size();
-    int maxProd = 1;
-    int minProd = 1;
-    int ans = INT_MIN;
+    double maxProd = INT_MIN;
+    double prod1 = 1;
+    double prod2 = 1;
 
-    for (int num : nums) {
-        int temp = maxProd;
-        maxProd = max(num, maxProd * num);
-        maxProd = max(maxProd, minProd * num);
-        minProd = min(num, minProd * num);
-        minProd = min(minProd, temp * num);
-        ans = max(ans, maxProd);
+    for (int i = 0; i < n; i++) {
+      prod1 *= nums[i];
+      prod2 *= nums[n - i - 1];
+
+      maxProd = max(maxProd, prod1);
+      maxProd = max(maxProd, prod2);
+
+      if (prod1 == 0) prod1 = 1;
+      if (prod2 == 0) prod2 = 1;
     }
-    return ans;
+
+    return maxProd;
   }
 };
 
