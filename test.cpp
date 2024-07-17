@@ -1,37 +1,49 @@
 #include <cstdarg>
+#include <type_traits>
+#include <unordered_set>
 
 #include "iostream"
 #include "map"
 #include "math.h"
 #include "vector"
 
-
 using namespace std;
 
-struct ListNode {
+struct TreeNode {
   int val;
-  ListNode* next;
-  ListNode() : val(0), next(nullptr) {}
-  ListNode(int x) : val(x), next(nullptr) {}
-  ListNode(int x, ListNode* next) : val(x), next(next) {}
+  TreeNode *left;
+  TreeNode *right;
+  TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
 class Solution {
 public:
-  ListNode* mergeNodes(ListNode* head) {
-    ListNode* ans = head->next;
-    while (ans) {
-      ListNode* temp = ans;
-      int sum = 0;
-      while (temp->val != 0) {
-        sum += temp->val;
-        temp = temp->next;
-      }
-      ans->val = sum;
-      ans->next = temp->next;
-      ans = ans->next;
+  vector<TreeNode *> res;
+  unordered_set<int> del;
+  void dfs(TreeNode *&root) {
+    if (root == NULL) return;
+
+    dfs(root->left);
+    dfs(root->right);
+
+    if (del.find(root->val) != del.end()) {
+      if (root->left) res.push_back(root->left);
+      if (root->right) res.push_back(root->right);
+      root = NULL;
+      delete root;
     }
-    return head->next;
+  }
+
+  vector<TreeNode *> delNodes(TreeNode *root, vector<int> &to_delete) {
+    for (int i = 0; i < to_delete.size(); i++) {
+      del.insert(to_delete[i]);
+    }
+
+    dfs(root);
+    res.push_back(root);
+    return res;
   }
 };
 
