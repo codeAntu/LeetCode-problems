@@ -18,19 +18,3 @@
 // }
 
 
-class Solution {
-    public int[][] restoreMatrix(int[] rowSum, int[] colSum) {
-        int m = rowSum.length;
-        int n = colSum.length;
-        
-        int[][] res = new int[m][n] ;
-        
-        for(int i = 0 ;i < m ; i++){
-            res[i][0] = rowSum[i] ;
-        }
-
-        for(int i = 0 ;i < n ; i++){
-            
-        }
-    }
-}
