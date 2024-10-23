@@ -1,11 +1,7 @@
 #include <string>
-#include <unordered_map>
 #include <unordered_set>
 
-#include "iostream"
-#include "map"
 #include "math.h"
-#include "vector"
 
 using namespace std;
 
@@ -13,7 +9,7 @@ class Solution {
 public:
   unordered_set<string> set;
 
-  int dfs(string & S, int index) {
+  int dfs(string& S, int index) {
     if (index == S.size()) {
       return 0;
     }
